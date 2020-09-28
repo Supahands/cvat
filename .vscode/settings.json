@@ -16,7 +16,7 @@
             "changeProcessCWD": true
         },
         {
-            "directory":  "./cvat-ui",
+            "directory":  "./cvat-ui-supa",
             "changeProcessCWD": true
         },
         {

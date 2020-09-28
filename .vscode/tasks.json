@@ -7,7 +7,7 @@
             "label": "ui.js: server",
             "type": "npm",
             "script": "start",
-            "path": "cvat-ui/",
+            "path": "cvat-ui-supa/",
             "problemMatcher": []
         }
     ]
