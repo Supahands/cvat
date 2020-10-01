@@ -52,7 +52,7 @@ services:
       DJANGO_MODWSGI_EXTRA_ARGS: ""
       ALLOWED_HOSTS: '*'
       CVAT_REDIS_HOST: "cvat_redis"
-      CVAT_POSTGRES_HOST: "cvat_db"
+      CVAT_POSTGRES_HOST: "database-cvat.cvcxedjal8qt.us-west-2.rds.amazonaws.com"
     volumes:
       - cvat_data:/home/django/data
       - cvat_keys:/home/django/keys
@@ -127,3 +127,4 @@ volumes:
   cvat_keys:
   cvat_logs:
   cvat_models:
+
