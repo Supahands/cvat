@@ -59,25 +59,25 @@ services:
       - cvat_logs:/home/django/logs
       - cvat_models:/home/django/models
 
-  cvat_ui:
-    container_name: cvat_ui
-    image: cvat/ui
-    restart: always
-    build:
-      context: .
-      args:
-        http_proxy:
-        https_proxy:
-        no_proxy:
-        socks_proxy:
-      dockerfile: Dockerfile.ui
+  # cvat_ui:
+  #   container_name: cvat_ui
+  #   image: cvat/ui
+  #   restart: always
+  #   build:
+  #     context: .
+  #     args:
+  #       http_proxy:
+  #       https_proxy:
+  #       no_proxy:
+  #       socks_proxy:
+  #     dockerfile: Dockerfile.ui
 
-    networks:
-      default:
-        aliases:
-          - ui
-    depends_on:
-      - cvat
+  #   networks:
+  #     default:
+  #       aliases:
+  #         - ui
+  #   depends_on:
+  #     - cvat
 
   cvat_proxy:
     container_name: cvat_proxy
@@ -85,7 +85,7 @@ services:
     restart: always
     depends_on:
       - cvat
-      - cvat_ui
+      # - cvat_ui
     environment:
       CVAT_HOST: localhost
     ports:
