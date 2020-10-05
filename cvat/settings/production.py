@@ -37,6 +37,7 @@ DATABASES = {
 # dev only, need production ready settings
 CORS_ALLOWED_ORIGINS = (
     'http://localhost:3000',
+    'http://supa-cvat-ui.s3-ap-southeast-1.amazonaws.com'
 )
 
 CORS_ALLOW_METHODS = [
