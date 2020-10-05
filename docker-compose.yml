@@ -79,6 +79,9 @@ services:
   #   depends_on:
   #     - cvat
 
+  certbot:
+    image: certbot/certbot
+
   cvat_proxy:
     container_name: cvat_proxy
     image: nginx:stable-alpine
@@ -90,6 +93,7 @@ services:
       CVAT_HOST: ec2-54-149-244-218.us-west-2.compute.amazonaws.com
     ports:
       - "8080:80"
+      - "443:443"
     volumes:
       - ./cvat_proxy/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./cvat_proxy/conf.d/cvat.conf.template:/etc/nginx/conf.d/cvat.conf.template:ro
