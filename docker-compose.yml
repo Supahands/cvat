@@ -6,20 +6,20 @@
 version: "2.3"
 
 services:
-  cvat_db:
-    container_name: cvat_db
-    image: postgres:10-alpine
-    networks:
-      default:
-        aliases:
-          - db
-    restart: always
-    environment:
-      POSTGRES_USER: root
-      POSTGRES_DB: cvat
-      POSTGRES_HOST_AUTH_METHOD: trust
-    volumes:
-      - cvat_db:/var/lib/postgresql/data
+#  cvat_db:
+#    container_name: cvat_db
+#    image: postgres:10-alpine
+#    networks:
+#      default:
+#        aliases:
+#          - db
+#    restart: always
+#    environment:
+#      POSTGRES_USER: root
+#      POSTGRES_DB: cvat
+#      POSTGRES_HOST_AUTH_METHOD: trust
+#    volumes:
+#      - cvat_db:/var/lib/postgresql/data
 
   cvat_redis:
     container_name: cvat_redis
@@ -36,7 +36,7 @@ services:
     restart: always
     depends_on:
       - cvat_redis
-      - cvat_db
+#      - cvat_db
     build:
       context: .
       args:
@@ -122,7 +122,7 @@ networks:
           gateway: 172.28.0.1
 
 volumes:
-  cvat_db:
+#  cvat_db:
   cvat_data:
   cvat_keys:
   cvat_logs:
