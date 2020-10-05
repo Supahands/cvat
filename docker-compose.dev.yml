@@ -45,7 +45,7 @@ services:
         no_proxy: nuclio,${no_proxy}
         socks_proxy:
         USER: "django"
-        DJANGO_CONFIGURATION: "production"
+        DJANGO_CONFIGURATION: "development"
         TZ: "Etc/UTC"
         CLAM_AV: "no"
     environment:
@@ -53,14 +53,31 @@ services:
       ALLOWED_HOSTS: '*'
       CVAT_REDIS_HOST: "cvat_redis"
       CVAT_POSTGRES_HOST: "cvat_db"
-      ALLOWED_HOSTS: .amazonaws.com
-      CVAT_SHARE_URL: "Mounted from /s3"
     volumes:
       - cvat_data:/home/django/data
       - cvat_keys:/home/django/keys
       - cvat_logs:/home/django/logs
       - cvat_models:/home/django/models
-      - cvat_share:/home/django/share:ro
+
+  cvat_ui:
+    container_name: cvat_ui
+    image: cvat/ui
+    restart: always
+    build:
+      context: .
+      args:
+        http_proxy:
+        https_proxy:
+        no_proxy:
+        socks_proxy:
+      dockerfile: Dockerfile.ui
+
+    networks:
+      default:
+        aliases:
+          - ui
+    depends_on:
+      - cvat
 
   cvat_proxy:
     container_name: cvat_proxy
@@ -68,6 +85,7 @@ services:
     restart: always
     depends_on:
       - cvat
+      - cvat_ui
     environment:
       CVAT_HOST: localhost
     ports:
@@ -109,8 +127,3 @@ volumes:
   cvat_keys:
   cvat_logs:
   cvat_models:
-  cvat_share:
-    driver_opts:
-      type: none
-      device: /home/ubuntu/mys3bucket
-      o: bind
