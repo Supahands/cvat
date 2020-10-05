@@ -33,3 +33,20 @@ DATABASES = {
         'PASSWORD': os.getenv('CVAT_POSTGRES_PASSWORD', 'vLaCAq8ZB4HEHWQvE228JTbpG296w8X8'),
     }
 }
+
+# dev only, need production ready settings
+CORS_ALLOWED_ORIGINS = (
+    'http://localhost:3000',
+)
+
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS= True
