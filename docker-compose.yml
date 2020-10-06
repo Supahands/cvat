@@ -6,37 +6,37 @@
 version: "2.3"
 
 services:
-  cvat_db:
-    container_name: cvat_db
-    image: postgres:10-alpine
-    networks:
-      default:
-        aliases:
-          - db
-    restart: always
-    environment:
-      POSTGRES_USER: root
-      POSTGRES_DB: cvat
-      POSTGRES_HOST_AUTH_METHOD: trust
-    volumes:
-      - cvat_db:/var/lib/postgresql/data
+#  cvat_db:
+#    container_name: cvat_db
+#    image: postgres:10-alpine
+#    networks:
+#      default:
+#        aliases:
+#          - db
+#    restart: always
+#    environment:
+#      POSTGRES_USER: root
+#      POSTGRES_DB: cvat
+#      POSTGRES_HOST_AUTH_METHOD: trust
+#    volumes:
+#      - cvat_db:/var/lib/postgresql/data
 
-  cvat_redis:
-    container_name: cvat_redis
-    image: redis:4.0-alpine
-    networks:
-      default:
-        aliases:
-          - redis
-    restart: always
+  # cvat_redis:
+  #   container_name: cvat_redis
+  #   image: redis:4.0-alpine
+  #   networks:
+  #     default:
+  #       aliases:
+  #         - redis
+  #   restart: always
 
   cvat:
     container_name: cvat
     image: cvat/server
     restart: always
     depends_on:
-      - cvat_redis
-      - cvat_db
+#      - cvat_redis
+#      - cvat_db
     build:
       context: .
       args:
@@ -51,16 +51,36 @@ services:
     environment:
       DJANGO_MODWSGI_EXTRA_ARGS: ""
       ALLOWED_HOSTS: '*'
-      CVAT_REDIS_HOST: "cvat_redis"
-      CVAT_POSTGRES_HOST: "cvat_db"
-      ALLOWED_HOSTS: .amazonaws.com
-      CVAT_SHARE_URL: "Mounted from /s3"
+      CVAT_REDIS_HOST: "exp-redis-cvat-001.hscu4n.0001.usw2.cache.amazonaws.com"
+      CVAT_POSTGRES_HOST: "database-cvat.cvcxedjal8qt.us-west-2.rds.amazonaws.com"
     volumes:
       - cvat_data:/home/django/data
       - cvat_keys:/home/django/keys
       - cvat_logs:/home/django/logs
       - cvat_models:/home/django/models
-      - cvat_share:/home/django/share:ro
+
+  # cvat_ui:
+  #   container_name: cvat_ui
+  #   image: cvat/ui
+  #   restart: always
+  #   build:
+  #     context: .
+  #     args:
+  #       http_proxy:
+  #       https_proxy:
+  #       no_proxy:
+  #       socks_proxy:
+  #     dockerfile: Dockerfile.ui
+
+  #   networks:
+  #     default:
+  #       aliases:
+  #         - ui
+  #   depends_on:
+  #     - cvat
+
+  certbot:
+    image: certbot/certbot
 
   cvat_proxy:
     container_name: cvat_proxy
@@ -68,10 +88,12 @@ services:
     restart: always
     depends_on:
       - cvat
+      # - cvat_ui
     environment:
-      CVAT_HOST: localhost
+      CVAT_HOST: ec2-54-149-244-218.us-west-2.compute.amazonaws.com
     ports:
       - "8080:80"
+      - "443:443"
     volumes:
       - ./cvat_proxy/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./cvat_proxy/conf.d/cvat.conf.template:/etc/nginx/conf.d/cvat.conf.template:ro
@@ -104,13 +126,8 @@ networks:
           gateway: 172.28.0.1
 
 volumes:
-  cvat_db:
+#  cvat_db:
   cvat_data:
   cvat_keys:
   cvat_logs:
   cvat_models:
-  cvat_share:
-    driver_opts:
-      type: none
-      device: /home/ubuntu/mys3bucket
-      o: bind
