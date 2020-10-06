@@ -44,7 +44,7 @@ services:
     depends_on:
       - cvat
     environment:
-      CVAT_HOST: ec2-54-149-244-218.us-west-2.compute.amazonaws.com
+      CVAT_HOST: localhost
     ports:
       - "8080:80"
       - "443:443"
