@@ -50,7 +50,7 @@ services:
         CLAM_AV: "no"
     environment:
       DJANGO_MODWSGI_EXTRA_ARGS: ""
-      ALLOWED_HOSTS: '*'
+      ALLOWED_HOSTS: "*"
       CVAT_REDIS_HOST: "cvat_redis"
       CVAT_POSTGRES_HOST: "cvat_db"
     volumes:
