@@ -26,10 +26,6 @@ services:
       ALLOWED_HOSTS: "*"
       CVAT_REDIS_HOST: "exp-redis-cvat-001.hscu4n.0001.usw2.cache.amazonaws.com"
       CVAT_POSTGRES_HOST: "database-cvat.cvcxedjal8qt.us-west-2.rds.amazonaws.com"
-      #ALLOWED_HOSTS: .amazonaws.com
-      CVAT_SHARE_URL: "Mounted from /s3"
-    ports:
-      - "8080:8080"
     volumes:
       - cvat_share:/home/django/share:ro
       - cvat_data:/home/django/data
@@ -87,8 +83,3 @@ volumes:
   cvat_keys:
   cvat_logs:
   cvat_models:
-  cvat_share:
-    driver_opts:
-      type: none
-      device: /home/ubuntu/mys3bucket
-      o: bind
