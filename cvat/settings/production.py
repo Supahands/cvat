@@ -44,8 +44,26 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'HOST': os.getenv('CVAT_POSTGRES_HOST', 'cvat_db'),
-        'NAME': os.getenv('CVAT_POSTGRES_DBNAME', 'cvat'),
-        'USER': os.getenv('CVAT_POSTGRES_USER', 'root'),
-        'PASSWORD': os.getenv('CVAT_POSTGRES_PASSWORD', ''),
+        'NAME': os.getenv('CVAT_POSTGRES_DBNAME', 'postgres'),
+        'USER': os.getenv('CVAT_POSTGRES_USER', 'postgres'),
+        'PASSWORD': os.getenv('CVAT_POSTGRES_PASSWORD', 'vLaCAq8ZB4HEHWQvE228JTbpG296w8X8'),
     }
 }
+
+# dev only, need production ready settings
+CORS_ALLOWED_ORIGINS = (
+    'http://localhost:3000',
+    'http://supa-cvat-ui.s3-ap-southeast-1.amazonaws.com'
+)
+
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS= True
