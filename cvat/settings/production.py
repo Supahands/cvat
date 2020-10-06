@@ -23,6 +23,7 @@ SENDFILE_BACKEND = 'sendfile.backends.xsendfile'
 
 CORS_ALLOWED_ORIGINS = (
     'http://localhost:3000',
+    'https://supa-ui-exp.supahands.com',
 )
 
 CORS_ALLOW_METHODS = [
