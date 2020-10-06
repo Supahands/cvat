@@ -1,12 +1,18 @@
-server {
-    listen       80;
-    server_name  _ default;
-    return       404;
-}
+  server {
+    listen 80;
+    server_name obsidian-1307.supahands.com;
+    location / {
+      # Redirect any http requests to https
+      return 301 https://$server_name$request_uri;
+    }
+  }
 
 server {
-    listen       80;
-    server_name  ${CVAT_HOST};
+    listen 443 ssl;
+    server_name obsidian-1307.supahands.com;
+
+    ssl_certificate /etc/letsencrypt/live/obsidian-1307.supahands.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/obsidian-1307.supahands.com/privkey.pem;
 
     proxy_pass_header       X-CSRFToken;
     proxy_set_header        Host $http_host;
