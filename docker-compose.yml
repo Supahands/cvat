@@ -44,8 +44,6 @@ services:
       - "8080:80"
       - "443:443"
     volumes:
-      - /etc/letsencrypt/live/obsidian-1307.supahands.com/fullchain.pem
-      - /etc/letsencrypt/live/obsidian-1307.supahands.com/privkey.pem
       - /etc/letsencrypt:/etc/letsencrypt:ro
       - ./cvat_proxy/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./cvat_proxy/conf.d/cvat.conf.template:/etc/nginx/conf.d/cvat.conf.template:ro
