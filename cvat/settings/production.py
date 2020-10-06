@@ -21,23 +21,6 @@ CACHEOPS_REDIS['host'] = os.getenv('CVAT_REDIS_HOST', 'cvat_redis')
 # https://github.com/johnsensible/django-sendfile
 SENDFILE_BACKEND = 'sendfile.backends.xsendfile'
 
-CORS_ALLOWED_ORIGINS = (
-    'http://localhost:3000',
-    'https://supa-ui-exp.supahands.com',
-)
-
-CORS_ALLOW_METHODS = [
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-]
-
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS= True
-
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
@@ -50,6 +33,13 @@ DATABASES = {
         'PASSWORD': os.getenv('CVAT_POSTGRES_PASSWORD', 'vLaCAq8ZB4HEHWQvE228JTbpG296w8X8'),
     }
 }
+
+# dev only, need production ready settings
+CORS_ALLOWED_ORIGINS = (
+    'http://localhost:3000',
+    'http://supa-cvat-ui.s3-ap-southeast-1.amazonaws.com',
+    'https://supa-ui-exp.supahands.com',
+)
 
 CORS_ALLOW_METHODS = [
     'DELETE',
