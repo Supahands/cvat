@@ -45,7 +45,7 @@ services:
         no_proxy: nuclio,${no_proxy}
         socks_proxy:
         USER: "django"
-        DJANGO_CONFIGURATION: "development"
+        DJANGO_CONFIGURATION: "local"
         TZ: "Etc/UTC"
         CLAM_AV: "no"
     environment:
