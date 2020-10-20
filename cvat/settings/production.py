@@ -47,19 +47,6 @@ CORS_ORIGIN_WHITELIST = [
     'https://supa-ui-exp.supahands.com',
 ]
 
-CORS_ALLOW_HEADERS = [
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
-    'X-CSRFToken',
-]
-
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:3000',
     'http://supa-cvat-ui.s3-ap-southeast-1.amazonaws.com',
