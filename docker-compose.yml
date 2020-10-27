@@ -23,7 +23,7 @@ services:
         CLAM_AV: "no"
     environment:
       DJANGO_MODWSGI_EXTRA_ARGS: ""
-      ALLOWED_HOSTS: "https://supa-ui-exp.supahands.com,https://obsidian-1307.supahands.com"
+      # ALLOWED_HOSTS: ""
       CVAT_REDIS_HOST: "exp-redis-cvat-001.hscu4n.0001.usw2.cache.amazonaws.com"
       CVAT_POSTGRES_HOST: "database-cvat.cvcxedjal8qt.us-west-2.rds.amazonaws.com"
     volumes:
