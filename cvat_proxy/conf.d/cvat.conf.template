@@ -33,18 +33,18 @@ server {
         # Append CORS headers to any request from
         # allowed CORS domain, except OPTIONS
         if ($cors = "1") {
-          more_set_headers 'Access-Control-Allow-Origin: $http_origin';
-          more_set_headers 'Access-Control-Allow-Credentials: true';
+          set_headers 'Access-Control-Allow-Origin: $http_origin';
+          set_headers 'Access-Control-Allow-Credentials: true';
           proxy_pass       http://cvat:8080;
         }
 
         # OPTIONS (pre-flight) request from allowed
         # CORS domain. return response directly
         if ($cors = "1o") {
-          more_set_headers 'Access-Control-Allow-Origin: $http_origin';
-          more_set_headers 'Access-Control-Allow-Methods: GET,POST,OPTIONS,PUT,DELETE,PATCH';
-          more_set_headers 'Access-Control-Allow-Credentials: true';
-          more_set_headers 'X-csrftoken, Authorization,Accept,Origin,DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range';
+          set_headers 'Access-Control-Allow-Origin: $http_origin';
+          set_headers 'Access-Control-Allow-Methods: GET,POST,OPTIONS,PUT,DELETE,PATCH';
+          set_headers 'Access-Control-Allow-Credentials: true';
+          set_headers 'X-csrftoken, Authorization,Accept,Origin,DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range';
           add_header Content-Length 0;
           add_header Content-Type text/plain;
           return 204;
