@@ -27,6 +27,5 @@ server {
 
     location / {
         proxy_pass              https://supa-ui-exp.supahands.com;
-        proxy_pass              https://obsidian-1307.supahands.com;
     }
 }
