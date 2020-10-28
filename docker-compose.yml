@@ -13,10 +13,7 @@ services:
     build:
       context: .
       args:
-        http_proxy:
-        https_proxy:
-        no_proxy: nuclio,${no_proxy}
-        socks_proxy:
+        no_proxy: nuclio
         USER: "django"
         DJANGO_CONFIGURATION: "production"
         TZ: "Etc/UTC"
@@ -26,10 +23,10 @@ services:
       CVAT_REDIS_HOST: "exp-redis-cvat-001.hscu4n.0001.usw2.cache.amazonaws.com"
       CVAT_POSTGRES_HOST: "database-cvat.cvcxedjal8qt.us-west-2.rds.amazonaws.com"
     volumes:
-      - cvat_data:/home/django/data
-      - cvat_keys:/home/django/keys
-      - cvat_logs:/home/django/logs
-      - cvat_models:/home/django/models
+      - cvat_data:/app/django/data
+      - cvat_keys:/app/django/keys
+      - cvat_logs:/app/django/logs
+      - cvat_models:/app/django/models
 
   serverless:
     container_name: nuclio
