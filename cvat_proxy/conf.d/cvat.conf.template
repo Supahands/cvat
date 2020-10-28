@@ -21,6 +21,10 @@ server {
     location ~* /api/.*|git/.*|analytics/.*|static/.*|admin(?:/(.*))?.*|documentation/.*|django-rq(?:/(.*))? {
         add_header 'Access-Control-Allow-Headers' 'X-csrftoken, Authorization,Accept,Origin,DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range';
         add_header 'Access-Control-Allow-Methods' 'GET,POST,OPTIONS,PUT,DELETE,PATCH';
-        proxy_pass              http://cvat:8080;
+        proxy_pass http://cvat:8080;
+    }
+
+    location / {
+      proxy_pass  https://supa-ui-exp.supahands.com;
     }
 }
