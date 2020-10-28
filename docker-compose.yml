@@ -23,7 +23,6 @@ services:
         CLAM_AV: "no"
     environment:
       DJANGO_MODWSGI_EXTRA_ARGS: ""
-      # ALLOWED_HOSTS: ""
       CVAT_REDIS_HOST: "exp-redis-cvat-001.hscu4n.0001.usw2.cache.amazonaws.com"
       CVAT_POSTGRES_HOST: "database-cvat.cvcxedjal8qt.us-west-2.rds.amazonaws.com"
     volumes:
@@ -31,23 +30,6 @@ services:
       - cvat_keys:/home/django/keys
       - cvat_logs:/home/django/logs
       - cvat_models:/home/django/models
-
-  cvat_proxy:
-    container_name: cvat_proxy
-    image: nginx:stable-alpine
-    restart: always
-    depends_on:
-      - cvat
-    environment:
-      CVAT_HOST: localhost
-    ports:
-      - "8080:80"
-      - "443:443"
-    volumes:
-      - /etc/letsencrypt:/etc/letsencrypt:ro
-      - ./cvat_proxy/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./cvat_proxy/conf.d/cvat.conf.template:/etc/nginx/conf.d/cvat.conf.template:ro
-    command: /bin/sh -c "envsubst '$$CVAT_HOST' < /etc/nginx/conf.d/cvat.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
 
   serverless:
     container_name: nuclio
