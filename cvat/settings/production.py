@@ -41,17 +41,17 @@ CORS_ALLOWED_ORIGINS = (
     'https://supa-ui-exp.supahands.com',
 )
 
-# CORS_ORIGIN_WHITELIST = [
-#     'http://localhost:3000',
-#     'http://supa-cvat-ui.s3-ap-southeast-1.amazonaws.com',
-#     'https://supa-ui-exp.supahands.com',
-# ]
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
+    'http://supa-cvat-ui.s3-ap-southeast-1.amazonaws.com',
+    'https://supa-ui-exp.supahands.com',
+]
 
-# CSRF_TRUSTED_ORIGINS = [
-#     'http://localhost:3000',
-#     'http://supa-cvat-ui.s3-ap-southeast-1.amazonaws.com',
-#     'https://supa-ui-exp.supahands.com',
-# ]
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:3000',
+    'http://supa-cvat-ui.s3-ap-southeast-1.amazonaws.com',
+    'https://supa-ui-exp.supahands.com',
+]
 
 CORS_ALLOW_METHODS = [
     'DELETE',
