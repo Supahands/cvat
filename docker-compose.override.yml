@@ -3,10 +3,7 @@ version: "2.3"
 services:
   cvat:
     environment:
-      ALLOWED_HOSTS: .amazonaws.com
       CVAT_SHARE_URL: "Mounted from /s3"
-    ports:
-      - "80:8080"
     volumes:
       - cvat_share:/home/django/share:ro
 
